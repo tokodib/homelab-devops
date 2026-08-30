@@ -31,9 +31,9 @@ Ez a roadmap **ráépül** a korábban véglegesített 5 fázisos DevOps tanulá
 *Már elkészült váz, ez a végrehajtási lépés.*
 
 - [x] Cloud-init template létrehozása Proxmoxon (Ubuntu Server 22.04/24.04 LTS)
-- [ ] Proxmox API token létrehozása Terraformnak (korlátozott jogokkal)
-- [ ] `terraform apply` — VM létrehozása
-- [ ] Erőforrás-tervezés: mivel minden Dockerben fut egy gépen, javasolt indulásnak **4 vCPU / 6-8 GB RAM**, bővíthetően (a Proxmox host 16 GB RAM-jából reálisan ennyi allokálható a többi VM/LXC mellett)
+- [x] Proxmox API token létrehozása Terraformnak (korlátozott jogokkal)
+- [x] `terraform apply` — VM létrehozása
+- [x] Erőforrás-tervezés: mivel minden Dockerben fut egy gépen, javasolt indulásnak **4 vCPU / 6-8 GB RAM**, bővíthetően (a Proxmox host 16 GB RAM-jából reálisan ennyi allokálható a többi VM/LXC mellett)
 - [ ] Storage tervezés: **SSD** → OS + adatbázisok + konténer volume-ok (I/O érzékeny); **HDD** → média könyvtár, torrent letöltések, fotók archívuma (nagy méret, kevésbé I/O érzékeny)
 
 ---

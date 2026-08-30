@@ -103,4 +103,9 @@ A laptopodon (nem a Proxmoxon) futtasd: curl -k -H "Authorization: PVEAPIToken=t
   **proxmox_virtual_environment_vm.axion17: Creation complete after 1m21s [id=222]**
 - `terraform destroy` - ha törölni akarjuk a VM-et
 - `ssh ansible@192.168.1.222` címmel bejelentkezhetünk a VM-be
+
+### 2026-08-30 - Ansible
+- Könyvtárstruktúra és az `inventory.ini` fájl létrehozása, majd `ansible.cfg`
+- `ansible devops_lab -m ping` - ping: pong válasz volt, teszteltük a kapcsolatot az ansible és a VM között
+- `homelab-devops/ansible/roles/common/tasks/main.yml` könyvtár és fájl létrehozása
 <!-- Új bejegyzések ide, a lista tetejére vagy aljára — legyél konzisztens, javasolt: időrendben lefelé, mint most -->
