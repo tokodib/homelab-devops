@@ -1,0 +1,2 @@
+proxmox_endpoint  = "https://xxx.xxx.xxx.xxxx:8006/api2/json"
+proxmox_api_token = "terraform@pve!tf-token=12345678-1234-1234-1234-111111111111"

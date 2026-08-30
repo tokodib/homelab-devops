@@ -1,0 +1,80 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+crash.*.log
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+ansible/inventory/hosts.yml
+!ansible/inventory/hosts.yml.example
+*vault_pass*
+
+# SSH kulcsok / titkok
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+token
+# --- Terraform ---
+# State fájlok (tartalmazhatnak secreteket, és amúgy sem git-be valók)
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+
+# Valódi tfvars (API tokenek, IP-k) - csak a .example verzió commitolható
+*.tfvars
+*.tfvars.json
+!terraform.tfvars.example
+
+# Terraform plan fájlok (bináris, gépspecifikus)
+*.tfplan
+*.plan
+
+# CLI konfig, ha valaha helyi override-ot használnál
+.terraformrc
+terraform.rc
+
+# --- Ansible ---
+# Valódi inventory (IP-k, hostnevek) - csak a .example verzió commitolható
+ansible/inventory/hosts.yml
+!ansible/inventory/hosts.yml.example
+
+# Ansible retry fájlok
+*.retry
+
+# Ansible vault jelszó fájl, ha valaha bevezetnéd
+.vault_pass
+vault_pass.txt
+
+# --- SSH kulcsok (soha ne kerüljenek repóba, akkor sem ha véletlenül idekerülnek) ---
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# --- OS / szerkesztő zaj ---
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# --- Python venv, ha valaha ansible-lint/molecule kerülne a repóba ---
+.venv/
+__pycache__/
+*.pyc
