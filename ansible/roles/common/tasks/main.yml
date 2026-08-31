@@ -1,0 +1,29 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install common packages
+  apt:
+    name:
+      - git
+      - curl
+      - vim
+      - htop
+      - ufw
+      - mc
+      - btop
+    state: present
+
+- name: Allow SSH through the firewall
+  ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: setup UFW default policies
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming

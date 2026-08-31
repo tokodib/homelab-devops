@@ -13,6 +13,9 @@ crash.*.log
 ansible/inventory/hosts.yml
 !ansible/inventory/hosts.yml.example
 *vault_pass*
+inventory.ini
+!inventory.ini.example
+host_vars/
 
 # SSH kulcsok / titkok
 *.pem

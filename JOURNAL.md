@@ -108,4 +108,14 @@ A laptopodon (nem a Proxmoxon) futtasd: curl -k -H "Authorization: PVEAPIToken=t
 - Könyvtárstruktúra és az `inventory.ini` fájl létrehozása, majd `ansible.cfg`
 - `ansible devops_lab -m ping` - ping: pong válasz volt, teszteltük a kapcsolatot az ansible és a VM között
 - `homelab-devops/ansible/roles/common/tasks/main.yml` könyvtár és fájl létrehozása
+
+### 2026-08-31 - Ansible bővitgetések
+- `tasks/main.yml` és `site.yml` fájlok bővitgetése és `ansible-playbook site.yml` futtatása. Az ufw konfigurálása után `ssh`-t ellenőrizni kell, hogy nem zártuk-e ki magunkat a szerverről.
+- **Fontos:** a `ufw enable` sorrendje kritikus — előbb mindig az `allow 22/tcp` szabályt kell felvenni, utána jöhet a `state: enabled` + `policy: deny`. Ha fordítva, SSH-n keresztül kizárhatjuk magunkat.
+### 2026-08-31 - Ansible: docker role
+- GPG kulcs + hivatalos Docker apt repo hozzáadása (`{{ ansible_distribution_release }}` dinamikus fact, nem hardcode-olt `noble` — axion17 tiszta Ubuntu 24.04, nem Mint, szóval itt nem probléma).
+- Docker CE + cli + containerd + buildx + compose plugin telepítve.
+- Fontos: az `ansible` user docker csoportba adása csak ÚJ SSH session-ben lép érvénybe, a meglévő nem frissül automatikusan.
+- Fontos: `append: yes` a `user` modulnál, különben lecseréli a user összes csoportját ahelyett, hogy hozzáadná az újat.
+- Deprecation warningok (`apt_repository`, `ansible_*` factek) egyelőre tudatosan figyelmen kívül hagyva, technikai adósságként jegyezve.
 <!-- Új bejegyzések ide, a lista tetejére vagy aljára — legyél konzisztens, javasolt: időrendben lefelé, mint most -->
