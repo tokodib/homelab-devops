@@ -118,4 +118,19 @@ A laptopodon (nem a Proxmoxon) futtasd: curl -k -H "Authorization: PVEAPIToken=t
 - Fontos: az `ansible` user docker csoportba adása csak ÚJ SSH session-ben lép érvénybe, a meglévő nem frissül automatikusan.
 - Fontos: `append: yes` a `user` modulnál, különben lecseréli a user összes csoportját ahelyett, hogy hozzáadná az újat.
 - Deprecation warningok (`apt_repository`, `ansible_*` factek) egyelőre tudatosan figyelmen kívül hagyva, technikai adósságként jegyezve.
+
+### 2026-09-01 - Ansible: Gitea
+- `openssl rand -base64 24` - jelszó generálás
+- `gitea/tasks/main.yml` és `gitea/templates/docker-compose.yml.j2` feltöltése
+- docker-compose.yml.j2 template: Postgres 16 + Gitea 1.22, bind mount /opt/gitea alatt (nem named volume — backup-stratégia miatt).
+- Jelszókezelés: defaults/main.yml (placeholder) + host_vars/axion17.yml (git-ignore-olt valós jelszó) — host_vars override működik, ellenőrizve debug modullal.
+- Fontos: UID/GID-eket számként kellett megadni a bind mount könyvtárainál (git=1000, postgres=999), mert ezek konténeren belüli userek, a host /etc/passwd nem ismeri őket.
+- Fontos: YAML behúzási hiba ("conflicting action statements") — a modul paraméterei mindig eggyel beljebb legyenek, mint maga a modul neve.
+- Gitea elérhető: http://192.168.1.222:3000 (HTTP), port 2222 (SSH clone-hoz).
+- Postgres portja (5432) szándékosan NEM publikált kifelé — csak a gitea_net Docker hálózaton belül elérhető.
+- A Gitea telepítő oldalán az "Administrator Account Settings" szekció alapból összecsukva van — ha nem nyitod ki és töltöd ki, a telepítés admin user NÉLKÜL fut le.
+- Admin user utólagos létrehozása CLI-vel: `docker exec -it --user git gitea-gitea-1 gitea admin user create --username <name> --password <pw> --email <email> --admin`
+- FONTOS: `--user git` kell a docker exec-hez, különben "Gitea is not supposed to be run as root" hibát dob.
+- FONTOS: az "admin" felhasználónév foglalt/tiltott a Gitea-ban (URL-útvonal ütközés miatt) — válassz mást.
+- Bash: `<placeholder>` szövegbe NE tegyél szögletes zárójelet szó szerint, a `<` input redirectként értelmeződik.  
 <!-- Új bejegyzések ide, a lista tetejére vagy aljára — legyél konzisztens, javasolt: időrendben lefelé, mint most -->

@@ -16,6 +16,8 @@ ansible/inventory/hosts.yml
 inventory.ini
 !inventory.ini.example
 host_vars/
+!ansible/host_vars/axion17.yml.example
+host_vars/*.yml
 
 # SSH kulcsok / titkok
 *.pem
